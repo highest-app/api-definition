@@ -25,6 +25,9 @@ paths:
                     type: array
                     items:
                       $ref: ../models/location.v1.yaml
+                required:
+                  - code
+                  - locations
             application/xml:
               schema:
                 type: object
@@ -34,12 +37,53 @@ paths:
                 type: object
                 properties: {}
       operationId: get-locations
+      description: Get all the locations. Some fields will be missing in order to make the response lighter.
     post:
       summary: Create a new location
       tags:
         - Locations
-      responses: {}
       operationId: post-locations
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: ''
+        - schema:
+            type: string
+          in: header
+          name: ClubAuthorization
+      description: |-
+        Add a new location.
+        If the `ClubAuthorization` header is provided, it'll be automatically validated and added to the club's locations.
+        If the `Authorization` header is provided, the validation of a Highest staff member is required.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                photo:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  location:
+                    $ref: ../models/location.v1.yaml
+                required:
+                  - code
+                  - location
   '/locations/{location}':
     parameters:
       - schema:
@@ -51,20 +95,197 @@ paths:
       summary: Get a specific location
       tags:
         - Locations
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 1
+                  location:
+                    $ref: ../models/location.v1.yaml
+                required:
+                  - code
+                  - location
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 0
+                  error:
+                    type: string
+                required:
+                  - code
+                  - error
       operationId: get-locations-location
+      description: Get a specific location. All fields will be returned.
     patch:
       summary: Update location
       tags:
         - Locations
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 1
+                required:
+                  - code
+        '401':
+          description: 'Unauthorized : any token was provided'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 0
+                  error:
+                    type: string
+                required:
+                  - code
+                  - error
+        '403':
+          description: "Forbidden : the user isn't owner of the location"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 0
+                  error:
+                    type: string
+                required:
+                  - code
+                  - error
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    default: 0
+                    type: integer
+                  error:
+                    type: string
+                required:
+                  - code
+                  - error
       operationId: patch-locations-location
+      description: Update a location. The user or club must be logged in and be the owner of the location.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: If the owner is a user
+        - schema:
+            type: string
+          in: header
+          name: ClubAuthorization
+          description: If the owner is a club
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                photos:
+                  type: array
+                  items:
+                    type: string
     delete:
       summary: Delete location
       tags:
         - Locations
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 1
+                required:
+                  - code
+        '401':
+          description: 'Unauthorized : any token was provided'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 0
+                  error:
+                    type: string
+                required:
+                  - code
+                  - error
+        '403':
+          description: "Forbidden : the user isn't owner of the location"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 0
+                  error:
+                    type: string
+                required:
+                  - code
+                  - error
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 0
+                  error:
+                    type: string
+                required:
+                  - code
+                  - error
       operationId: delete-locations-location
+      description: Delete a location. This action can only performed by a Highest staff member.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
   '/locations/{location}/routes':
     parameters:
       - schema:
@@ -76,14 +297,85 @@ paths:
       summary: "Get locations' routes"
       tags:
         - Routes
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  location:
+                    $ref: ../models/location.v1.yaml
+                  routes:
+                    type: array
+                    items:
+                      $ref: ../models/route.v1.yaml
+                required:
+                  - code
+                  - location
+                  - routes
       operationId: get-locations-location-routes
+      description: Get all the routes in a specific location. Some fields will be missing in order to make the response lighter.
     post:
       summary: Create route on this location
       tags:
         - Routes
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 1
+                  route:
+                    $ref: ../models/route.v1.yaml
+                required:
+                  - code
+                  - route
       operationId: post-locations-location-routes
+      description: Create a route on this location. Caller must be owner of the location.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: If the owner is a user
+        - schema:
+            type: string
+          in: header
+          name: ClubAuthorization
+          description: If the owner is a club
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                grade:
+                  type: string
+                length:
+                  type: integer
+                notes:
+                  type: string
+                photo:
+                  type: string
+                creator:
+                  type: string
+              required:
+                - name
+                - grade
+                - length
+                - photo
+                - creator
   '/locations/{location}/routes/{route}':
     parameters:
       - schema:
@@ -100,20 +392,109 @@ paths:
       summary: Get a route in a specific location
       tags:
         - Routes
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  location:
+                    $ref: ../models/location.v1.yaml
+                  route:
+                    $ref: ../models/route.v1.yaml
+                required:
+                  - code
+                  - location
+                  - route
       operationId: get-locations-location-routes-route
+      description: Get a route in a specific location. All fields will be returned.
     patch:
       summary: Update route
       tags:
         - Routes
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 1
+                  route:
+                    $ref: ../models/route.v1.yaml
+                required:
+                  - code
+                  - route
       operationId: patch-locations-location-routes-route
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                grade:
+                  type: string
+                length:
+                  type: integer
+                notes:
+                  type: string
+                photos:
+                  type: array
+                  items:
+                    type: string
+                creator:
+                  type: string
+      description: Update a route on a location. Create a route on this location. Caller must be owner of the location.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: ClubAuthorization
+          description: If the owner is a club
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: If the owner is a user
     delete:
       summary: Delete route
       tags:
         - Routes
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 1
+                required:
+                  - code
       operationId: delete-locations-location-routes-route
+      description: Delete a route on a location. Caller must be owner of the location.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: ClubAuthorization
+          description: If the owner is a club
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: If the owner is a user
   /competitions:
     get:
       summary: Get all competitions
@@ -129,18 +510,97 @@ paths:
                 properties:
                   code:
                     type: number
+                    default: 1
                   competitions:
                     type: array
                     items:
                       $ref: ../models/competition.v1.yaml
+                required:
+                  - code
+                  - competitions
               examples: {}
       operationId: get-competitions
+      description: Get all the competitions. Some fields will be missing in order to make the response lighter.
     post:
       summary: Add new competition
       tags:
         - Competitions
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 1
+                  competition:
+                    $ref: ../models/competition.v1.yaml
+                required:
+                  - code
+                  - competition
+        '401':
+          description: 'Unauthorized : any token was provided'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 0
+                  error:
+                    type: string
+                required:
+                  - code
+                  - error
+        '403':
+          description: "Forbidden : the user isn't owner of the location"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 0
+                  error:
+                    type: string
+                required:
+                  - code
+                  - error
       operationId: post-competitions
+      description: Add a new competition. The caller must be a club manager.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: ClubAuthorization
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                location:
+                  type: string
+                  description: "Location's ID"
+                description:
+                  type: string
+                date:
+                  type: string
+                  format: date
+              required:
+                - name
+                - location
+                - description
+                - date
+        description: ''
   '/competitions/{competition}':
     parameters:
       - schema:
@@ -152,19 +612,79 @@ paths:
       summary: Get a specific competition
       tags:
         - Competitions
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  competition:
+                    $ref: ../models/competition.v1.yaml
       operationId: get-competitions-competition
+      description: Get a specific location. All fields will be returned.
     patch:
       summary: Update competition
       tags:
         - Competitions
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 1
       operationId: patch-competitions-competition
+      description: Update a competition. This action can only be performed by a club owner.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: ClubAuthorization
+          required: true
+          description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                description:
+                  type: string
     delete:
       summary: Delete competition
       tags:
         - Competitions
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 1
       operationId: delete-competitions-competition
+      description: Delete a competition. This action can only performed by a Highest staff member.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: ClubAuthorization
+          required: true
 components:
   schemas: {}
