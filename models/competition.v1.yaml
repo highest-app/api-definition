@@ -2,20 +2,22 @@ title: Competition model
 type: object
 x-tags:
   - Competitions
+description: A competition organized by a club in a certain location. The club can be a national or international organization.
+x-examples: {}
 properties:
   id:
     type: string
   name:
     type: string
   location:
-    $ref: ./location.v1.yaml
+    type: string
   date:
     type: string
     format: date
   description:
     type: string
   organizer:
-    $ref: ./club.v1.yaml
+    type: string
 required:
   - id
   - name
@@ -23,5 +25,3 @@ required:
   - date
   - description
   - organizer
-description: A competition organized by a club in a certain location. The club can be a national or international organization.
-x-examples: {}

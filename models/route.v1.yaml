@@ -9,11 +9,11 @@ properties:
   name:
     type: string
   location:
-    $ref: ./location.v1.yaml
+    type: string
   grade:
     type: string
   length:
-    type: number
+    type: integer
   notes:
     type: string
   photos:
