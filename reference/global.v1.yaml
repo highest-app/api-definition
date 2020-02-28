@@ -1,0 +1,170 @@
+openapi: 3.0.0
+info:
+  title: global
+  version: '1.0'
+  description: The global API for data not regarding users.
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /locations:
+    get:
+      summary: Get all locations
+      tags:
+        - Locations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  locations:
+                    type: array
+                    items:
+                      $ref: ../models/location.v1.yaml
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+            multipart/form-data:
+              schema:
+                type: object
+                properties: {}
+      operationId: get-locations
+    post:
+      summary: Create a new location
+      tags:
+        - Locations
+      responses: {}
+      operationId: post-locations
+  '/locations/{location}':
+    parameters:
+      - schema:
+          type: string
+        name: location
+        in: path
+        required: true
+    get:
+      summary: Get a specific location
+      tags:
+        - Locations
+      responses: {}
+      operationId: get-locations-location
+    patch:
+      summary: Update location
+      tags:
+        - Locations
+      responses: {}
+      operationId: patch-locations-location
+    delete:
+      summary: Delete location
+      tags:
+        - Locations
+      responses: {}
+      operationId: delete-locations-location
+  '/locations/{location}/routes':
+    parameters:
+      - schema:
+          type: string
+        name: location
+        in: path
+        required: true
+    get:
+      summary: "Get locations' routes"
+      tags:
+        - Routes
+      responses: {}
+      operationId: get-locations-location-routes
+    post:
+      summary: Create route on this location
+      tags:
+        - Routes
+      responses: {}
+      operationId: post-locations-location-routes
+  '/locations/{location}/routes/{route}':
+    parameters:
+      - schema:
+          type: string
+        name: location
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: route
+        in: path
+        required: true
+    get:
+      summary: Get a route in a specific location
+      tags:
+        - Routes
+      responses: {}
+      operationId: get-locations-location-routes-route
+    patch:
+      summary: Update route
+      tags:
+        - Routes
+      responses: {}
+      operationId: patch-locations-location-routes-route
+    delete:
+      summary: Delete route
+      tags:
+        - Routes
+      responses: {}
+      operationId: delete-locations-location-routes-route
+  /competitions:
+    get:
+      summary: Get all competitions
+      tags:
+        - Competitions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: number
+                  competitions:
+                    type: array
+                    items:
+                      $ref: ../models/competition.v1.yaml
+              examples: {}
+      operationId: get-competitions
+    post:
+      summary: Add new competition
+      tags:
+        - Competitions
+      responses: {}
+      operationId: post-competitions
+  '/competitions/{competition}':
+    parameters:
+      - schema:
+          type: string
+        name: competition
+        in: path
+        required: true
+    get:
+      summary: Get a specific competition
+      tags:
+        - Competitions
+      responses: {}
+      operationId: get-competitions-competition
+    patch:
+      summary: Update competition
+      tags:
+        - Competitions
+      responses: {}
+      operationId: patch-competitions-competition
+    delete:
+      summary: Delete competition
+      tags:
+        - Competitions
+      responses: {}
+      operationId: delete-competitions-competition
+components:
+  schemas: {}
