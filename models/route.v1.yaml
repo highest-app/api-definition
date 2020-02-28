@@ -1,0 +1,33 @@
+title: route
+type: object
+x-tags:
+  - Routes
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  location:
+    $ref: ./location.v1.yaml
+  grade:
+    type: string
+  length:
+    type: number
+  notes:
+    type: string
+  photos:
+    type: array
+    items:
+      type: string
+  creator:
+    type: string
+required:
+  - id
+  - name
+  - location
+  - grade
+  - length
+  - notes
+  - photos
+  - creator
+description: A climbing route inside a location.

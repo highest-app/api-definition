@@ -1,0 +1,17 @@
+title: location
+type: object
+x-tags:
+  - Locations
+x-examples: {}
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  description:
+    type: string
+  photos:
+    type: array
+    items:
+      type: string
+description: A location where to climb. Can be a gym or an outdoor site.

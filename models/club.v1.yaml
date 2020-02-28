@@ -1,0 +1,32 @@
+title: club
+type: object
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  website:
+    type: string
+  description:
+    type: string
+  photos:
+    type: array
+    items:
+      type: string
+  members:
+    type: array
+    items:
+      $ref: ./user.v1.yaml
+  locations:
+    type: array
+    items:
+      $ref: ./location.v1.yaml
+required:
+  - id
+  - name
+  - website
+  - description
+  - photos
+  - members
+  - locations
+description: 'A climbing club, with its members and locations.'

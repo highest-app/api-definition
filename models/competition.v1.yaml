@@ -1,0 +1,26 @@
+title: competition
+type: object
+x-tags:
+  - Competitions
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  location:
+    $ref: ./location.v1.yaml
+  date:
+    type: string
+    format: date
+  description:
+    type: string
+  organizer:
+    $ref: ./club.v1.yaml
+required:
+  - id
+  - name
+  - location
+  - date
+  - description
+  - organizer
+description: A competition organized by a club in a certain location. The club can be a national or international organization.
