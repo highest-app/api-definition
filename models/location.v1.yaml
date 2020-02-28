@@ -1,8 +1,9 @@
-title: location
+title: Location model
 type: object
 x-tags:
   - Locations
 x-examples: {}
+description: A location where to climb. Can be a gym or an outdoor site.
 properties:
   id:
     type: string
@@ -14,4 +15,12 @@ properties:
     type: array
     items:
       type: string
-description: A location where to climb. Can be a gym or an outdoor site.
+  'validated ':
+    type: boolean
+    description: 'If the newly added location is validated by a staff member, in order to display it publicly.'
+required:
+  - id
+  - name
+  - description
+  - photos
+  - 'validated '

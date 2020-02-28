@@ -1,6 +1,6 @@
 # Highest - API definition
 
-This repository is the definition of the Highest application's API. It's an OpenAPI format, and is manager using [Stoplight Studio](https:/stoplight.io)
+This repository is the definition of the Highest application's API. It's an OpenAPI format, and is manager using [Stoplight Studio](https://stoplight.io)
 
 The architecture is made of :
 

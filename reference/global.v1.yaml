@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: global
+  title: Global data API
   version: '1.0'
   description: The global API for data not regarding users.
 servers:

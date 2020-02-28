@@ -1,5 +1,6 @@
-title: club
+title: Club model
 type: object
+description: 'A climbing club, with its members and locations.'
 properties:
   id:
     type: string
@@ -21,6 +22,9 @@ properties:
     type: array
     items:
       $ref: ./location.v1.yaml
+  validated:
+    type: boolean
+    description: 'If the submitted club is validated by a staff member. If validated, have access to location adding with auto validation and competition adding.'
 required:
   - id
   - name
@@ -29,4 +33,4 @@ required:
   - photos
   - members
   - locations
-description: 'A climbing club, with its members and locations.'
+  - validated

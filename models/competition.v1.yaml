@@ -1,4 +1,4 @@
-title: competition
+title: Competition model
 type: object
 x-tags:
   - Competitions
@@ -24,3 +24,4 @@ required:
   - description
   - organizer
 description: A competition organized by a club in a certain location. The club can be a national or international organization.
+x-examples: {}

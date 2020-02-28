@@ -1,4 +1,4 @@
-title: user
+title: User model
 type: object
 description: 'User of the application, serves to store personal data and managing clubs.'
 properties:

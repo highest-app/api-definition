@@ -1,7 +1,8 @@
-title: route
+title: Route model
 type: object
 x-tags:
   - Routes
+description: A climbing route inside a location.
 properties:
   id:
     type: string
@@ -21,13 +22,15 @@ properties:
       type: string
   creator:
     type: string
+  validated:
+    type: boolean
+    description: 'If the newly added route is validated by a staff member, in order to display it publicly.'
 required:
   - id
   - name
   - location
   - grade
   - length
-  - notes
   - photos
   - creator
-description: A climbing route inside a location.
+  - validated
