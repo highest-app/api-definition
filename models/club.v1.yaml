@@ -8,6 +8,7 @@ properties:
     type: string
   website:
     type: string
+    pattern: "^(http\\:\\/\\/|https\\:\\/\\/)?([a-z0-9][a-z0-9\\-]*\\.)+[a-z0-9][a-z0-9\\-]*$"
   description:
     type: string
   photos:
@@ -20,17 +21,19 @@ properties:
       type: string
   locations:
     type: array
+    default: []
     items:
       type: string
   validated:
     type: boolean
     description: 'If the submitted club is validated by a staff member. If validated, have access to location adding with auto validation and competition adding.'
+  feed:
+    type: string
+    description: ''
 required:
   - id
   - name
-  - website
   - description
   - photos
   - members
-  - locations
   - validated

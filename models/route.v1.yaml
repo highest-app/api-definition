@@ -25,6 +25,9 @@ properties:
   validated:
     type: boolean
     description: 'If the newly added route is validated by a staff member, in order to display it publicly.'
+  color:
+    type: string
+    pattern: '#[A-Z0-9]{6}'
 required:
   - id
   - name
@@ -34,3 +37,4 @@ required:
   - photos
   - creator
   - validated
+  - color
