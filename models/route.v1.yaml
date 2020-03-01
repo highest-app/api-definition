@@ -10,6 +10,7 @@ properties:
     type: string
   location:
     type: string
+    description: ID of the location where the route is
   grade:
     type: string
   length:
@@ -22,12 +23,14 @@ properties:
       type: string
   creator:
     type: string
+    description: "User ID of route's creator"
   validated:
     type: boolean
     description: 'If the newly added route is validated by a staff member, in order to display it publicly.'
   color:
     type: string
     pattern: '#[A-Z0-9]{6}'
+    description: 'Must be in hexadecimal format (example : #B71C1C)'
 required:
   - id
   - name

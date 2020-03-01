@@ -11,7 +11,7 @@ properties:
     type: string
   location:
     type: string
-    description: ''
+    description: ID of the location where the competition occurs
   date:
     type: string
     format: date
@@ -19,7 +19,7 @@ properties:
     type: string
   organizer:
     type: string
-    description: ''
+    description: ID of the club that organizes this competition
   website:
     type: string
     pattern: "^(http\\:\\/\\/|https\\:\\/\\/)?([a-z0-9][a-z0-9\\-]*\\.)+[a-z0-9][a-z0-9\\-]*$"

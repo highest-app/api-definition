@@ -29,11 +29,13 @@ properties:
   locations:
     type: array
     default: []
+    description: 'Array of location IDs : locations that the user manages'
     items:
       type: string
   roles:
     type: array
     default: []
+    description: All the roles attributed to the user
     items:
       type: object
       properties:
@@ -42,13 +44,12 @@ properties:
           description: 'Type of the role : location, club, highest.'
         id:
           type: string
-          description: Identifier of the described type
+          description: "Identifier of the described type. Null if role's type is highest"
         role:
           type: string
           description: 'Role of the user : member, manager, owner.'
       required:
         - type
-        - id
         - role
 required:
   - id

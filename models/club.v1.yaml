@@ -17,11 +17,13 @@ properties:
       type: string
   members:
     type: array
+    description: 'Array of user IDs : members of this club'
     items:
       type: string
   locations:
     type: array
     default: []
+    description: 'Array of location IDs : locations that the club manages, or where the club is'
     items:
       type: string
   validated:
@@ -29,7 +31,7 @@ properties:
     description: 'If the submitted club is validated by a staff member. If validated, have access to location adding with auto validation and competition adding.'
   feed:
     type: string
-    description: ''
+    description: The RSS feed of this club
 required:
   - id
   - name

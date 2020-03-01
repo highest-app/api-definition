@@ -20,7 +20,7 @@ properties:
     description: 'If the newly added location is validated by a staff member, in order to display it publicly.'
   feed:
     type: string
-    description: ''
+    description: The RSS feed of this location
   website:
     type: string
     pattern: "^(http\\:\\/\\/|https\\:\\/\\/)?([a-z0-9][a-z0-9\\-]*\\.)+[a-z0-9][a-z0-9\\-]*$"
