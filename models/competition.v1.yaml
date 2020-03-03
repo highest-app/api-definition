@@ -10,16 +10,14 @@ properties:
   name:
     type: string
   location:
-    type: string
-    description: ID of the location where the competition occurs
+    $ref: ./location.v1.yaml
   date:
     type: string
     format: date
   description:
     type: string
   organizer:
-    type: string
-    description: ID of the club that organizes this competition
+    $ref: ./club.v1.yaml
   website:
     type: string
     pattern: "^(http\\:\\/\\/|https\\:\\/\\/)?([a-z0-9][a-z0-9\\-]*\\.)+[a-z0-9][a-z0-9\\-]*$"

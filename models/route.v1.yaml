@@ -9,8 +9,7 @@ properties:
   name:
     type: string
   location:
-    type: string
-    description: ID of the location where the route is
+    $ref: ./location.v1.yaml
   grade:
     type: string
   length:

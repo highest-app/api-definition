@@ -26,10 +26,9 @@ properties:
     format: date-time
   locations:
     type: array
-    default: []
     description: 'Array of location IDs : locations that the user manages'
     items:
-      type: string
+      $ref: ./location.v1.yaml
   roles:
     type: array
     default: []
