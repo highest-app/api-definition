@@ -5,7 +5,7 @@ x-tags:
 description: A competition organized by a club in a certain location. The club can be a national or international organization.
 x-examples: {}
 properties:
-  id:
+  slug:
     type: string
   name:
     type: string
@@ -24,7 +24,7 @@ properties:
     type: string
     pattern: "^(http\\:\\/\\/|https\\:\\/\\/)?([a-z0-9][a-z0-9\\-]*\\.)+[a-z0-9][a-z0-9\\-]*$"
 required:
-  - id
+  - slug
   - name
   - location
   - date

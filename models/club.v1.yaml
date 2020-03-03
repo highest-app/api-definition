@@ -2,7 +2,7 @@ title: Club model
 type: object
 description: 'A climbing club, with its members and locations.'
 properties:
-  id:
+  slug:
     type: string
   name:
     type: string
@@ -33,7 +33,7 @@ properties:
     type: string
     description: The RSS feed of this club
 required:
-  - id
+  - slug
   - name
   - description
   - photos

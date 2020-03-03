@@ -4,7 +4,7 @@ x-tags:
   - Routes
 description: A climbing route inside a location.
 properties:
-  id:
+  slug:
     type: string
   name:
     type: string
@@ -32,7 +32,7 @@ properties:
     pattern: '#[A-Z0-9]{6}'
     description: 'Must be in hexadecimal format (example : #B71C1C)'
 required:
-  - id
+  - slug
   - name
   - location
   - grade

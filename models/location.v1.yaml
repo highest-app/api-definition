@@ -5,7 +5,7 @@ x-tags:
 x-examples: {}
 description: A location where to climb. Can be a gym or an outdoor site.
 properties:
-  id:
+  slug:
     type: string
   name:
     type: string
@@ -30,7 +30,7 @@ properties:
     type: string
     description: The RSS feed of this location
 required:
-  - id
+  - slug
   - name
   - description
   - photos
