@@ -18,15 +18,21 @@ properties:
   'validated ':
     type: boolean
     description: 'If the newly added location is validated by a staff member, in order to display it publicly.'
-  feed:
+  type:
     type: string
-    description: The RSS feed of this location
+    enum:
+      - gym
+      - outdoor
   website:
     type: string
     pattern: "^(http\\:\\/\\/|https\\:\\/\\/)?([a-z0-9][a-z0-9\\-]*\\.)+[a-z0-9][a-z0-9\\-]*$"
+  feed:
+    type: string
+    description: The RSS feed of this location
 required:
   - id
   - name
   - description
   - photos
   - 'validated '
+  - feed

@@ -41,13 +41,20 @@ properties:
       properties:
         type:
           type: string
-          description: 'Type of the role : location, club, highest.'
+          description: ''
+          enum:
+            - location
+            - club
+            - highest
         id:
           type: string
           description: "Identifier of the described type. Null if role's type is highest"
         role:
           type: string
-          description: 'Role of the user : member, manager, owner.'
+          enum:
+            - member
+            - manager
+            - owner
       required:
         - type
         - role
