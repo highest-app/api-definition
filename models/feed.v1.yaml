@@ -1,0 +1,19 @@
+title: Feed model
+type: object
+x-tags:
+  - Climbing
+properties:
+  name:
+    type: string
+  language:
+    type: string
+    enum:
+      - fr
+      - en
+  link:
+    type: string
+required:
+  - name
+  - language
+  - link
+description: A RSS feed to get news about climbing in general
